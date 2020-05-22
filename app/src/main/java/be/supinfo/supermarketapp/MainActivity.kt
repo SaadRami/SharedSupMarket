@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -75,9 +76,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         val navView = findViewById<NavigationView>(R.id.nav_view)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+//        setSupportActionBar(toolbar)
 
         navView.setNavigationItemSelectedListener(this)
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar, R.string.open_nav_drawer,
+            R.string.close_nav_drawer
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
         fab = findViewById(R.id.fab)
         fab.setOnClickListener { viewModel.displayData() }
@@ -90,8 +98,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        drawerLayout.closeDrawer(GravityCompat.START)
         if (item.itemId == R.id.action_about) {
+            drawerLayout.closeDrawer(GravityCompat.START)
             AboutActivity.start(this)
         }
         return true
