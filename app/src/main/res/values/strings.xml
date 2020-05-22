@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">SuperMarket</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -14,4 +14,5 @@
     <string name="edit_text2_hint">Prénom</string>
     <string name="share">Share</string>
     <string name="about">About</string>
+    <string name="settings">Settings</string>
 </resources>
