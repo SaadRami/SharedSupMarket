@@ -1,4 +1,4 @@
-package be.supinfo.supermarketapp
+package be.supinfo.supermarketapp.util
 
 import android.util.Log
 import androidx.lifecycle.Lifecycle

@@ -1,9 +1,10 @@
-package be.supinfo.supermarketapp.viewModel
+package be.supinfo.supermarketapp.ui.main
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import be.supinfo.supermarketapp.R
 import be.supinfo.supermarketapp.VIEWMMODEL_TAG
 import be.supinfo.supermarketapp.util.MyHelper
 
@@ -24,9 +25,13 @@ class MyViewModel(app: Application) : AndroidViewModel(app) {
         // prenom refers to the live data object, to save its value use .value
         prenom.value = ""
         // By setting a value we're publishing them
+
+        val data = MyHelper.getDataFromResourceFile(context, R.raw.products_data)
+        Log.i(VIEWMMODEL_TAG, data)
+
     }
 
     fun displayData() {
-        prenom.value = MyHelper.blFunction()
+        prenom.value = "test"
     }
 }

@@ -13,7 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import be.supinfo.supermarketapp.util.MyHelper
-import be.supinfo.supermarketapp.viewModel.MyViewModel
+import be.supinfo.supermarketapp.ui.main.MyViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
