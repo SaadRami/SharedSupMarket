@@ -7,16 +7,24 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import be.supinfo.supermarketapp.util.MyHelper
 import be.supinfo.supermarketapp.viewModel.MyViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.content_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    // drawer layout will have to be accessible from all functions, its gonna be declared as property (private)
+    private val drawerLayout by lazy {
+        findViewById<DrawerLayout>(R.id.drawerLayout)
+    }
+
     private lateinit var viewModel: MyViewModel
     // private var myArray = arrayOf(1, 2, 3, 4)
 
@@ -65,6 +73,12 @@ class MainActivity : AppCompatActivity() {
 //            println(myView.isVisible)
 //        }
 
+
+        val navView = findViewById<NavigationView>(R.id.nav_view)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+
+        navView.setNavigationItemSelectedListener(this)
+
         fab = findViewById(R.id.fab)
         fab.setOnClickListener { viewModel.displayData() }
 
@@ -73,6 +87,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         //lifecycle.addObserver(MyLifeCycleObserver(LOG_TAG_MAIN_ACTIVITY_DETAILS))
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawerLayout.closeDrawer(GravityCompat.START)
+        if (item.itemId == R.id.action_about) {
+            AboutActivity.start(this)
+        }
+        return true
     }
 
     private fun goToAnotherActivity() {
