@@ -2,6 +2,8 @@ package be.supinfo.supermarketapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
 
 //        prenom_value = savedInstanceState?.getString(ET_PRENOM) ?: ""
 //        et_prenom.setText(prenom_value)
@@ -78,6 +81,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.about) {
+            AboutActivity.start(this)
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main2, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     private fun handleClickFabEvent(it: View) {
 //        for(i in 0 until collection.size){
 //
@@ -90,7 +106,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
     }
-
 
 
 //    override fun onSaveInstanceState(outState: Bundle) {

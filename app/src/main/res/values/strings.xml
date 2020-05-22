@@ -13,4 +13,5 @@
     <string name="edit_text1_hint">Nom</string>
     <string name="edit_text2_hint">Prénom</string>
     <string name="share">Share</string>
+    <string name="about">About</string>
 </resources>
