@@ -5,10 +5,18 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import be.supinfo.supermarketapp.R
-import be.supinfo.supermarketapp.VIEWMMODEL_TAG
+import be.supinfo.supermarketapp.data.Product
 import be.supinfo.supermarketapp.util.MyHelper
+import be.supinfo.supermarketapp.util.VIEWMMODEL_TAG
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 
 class MyViewModel(app: Application) : AndroidViewModel(app) {
+
+    // Moshi
+    // Create a custom type that will be used to create or parse JSon data
+    private val listType = Types.newParameterizedType(List::class.java, Product::class.java)
 
 //    Always save the application reference. This is being passed in as the viewModel object is being created,
 //    but it won't persist for the lifetime of the viewModel, and so I'll handle that by creating a new variable here
@@ -26,12 +34,28 @@ class MyViewModel(app: Application) : AndroidViewModel(app) {
         prenom.value = ""
         // By setting a value we're publishing them
 
-        val data = MyHelper.getDataFromResourceFile(context, R.raw.products_data)
-        Log.i(VIEWMMODEL_TAG, data)
+        val dataFromResources = MyHelper.getDataFromResources(context, R.raw.products_data)
+        val dataFromAssets = MyHelper.getDataFromAssets(context, "products_data.json")
+//        Log.i(VIEWMMODEL_TAG, dataFromAss)
+        parseJson(dataFromAssets)
 
     }
 
     fun displayData() {
         prenom.value = "test"
+    }
+
+
+    fun parseJson(text: String) {
+        // Create an instance of the Moshi Library, use build pattern to create it
+        val moshi = Moshi.Builder().build()
+        // create moshi adapter, set its type to Jsonadapter using generic class(List<ModelClass>)
+        // initialize it with moshi.adapter to wich we pass the listType
+        val adapter: JsonAdapter<List<Product>> = moshi.adapter(listType)
+        val products = adapter.fromJson(text)
+
+        for (product in products ?: emptyList()) {
+            Log.i(VIEWMMODEL_TAG, "${product.title}  (\$${product.price})")
+        }
     }
 }

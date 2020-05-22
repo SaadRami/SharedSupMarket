@@ -1,4 +1,4 @@
-package be.supinfo.supermarketapp
+package be.supinfo.supermarketapp.util
 
 const val LOG_TAG_MAIN_ACTIVITY_DETAILS = "MainActivity"
 const val LOG_TAG_INDICES = "Indices :"
