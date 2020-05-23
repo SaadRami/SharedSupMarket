@@ -12,8 +12,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import be.supinfo.supermarketapp.util.MyHelper
 import be.supinfo.supermarketapp.ui.main.MyViewModel
+import be.supinfo.supermarketapp.util.MyHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // class that has a single function
         // it : is the value published from the viewModel
         viewModel.prenom.observe(this, Observer { et_prenom.text = it })
+        viewModel.getProducts()
 
 //        for (i in 0 until myArray.size) {
 //            Log.i(LOG_TAG_INDICES, "$i")
