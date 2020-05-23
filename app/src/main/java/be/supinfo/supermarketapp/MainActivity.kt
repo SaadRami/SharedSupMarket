@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //            }
             val sb = StringBuilder()
             for (product in it) {
-                sb.append("${product.productTitle}  (\$${product.price})")
+                sb.append("${product.title}  (\$${product.price})")
                     .append("\n")
             }
             tvProducts.text = sb

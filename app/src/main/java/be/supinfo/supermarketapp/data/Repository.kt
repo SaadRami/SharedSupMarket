@@ -3,13 +3,20 @@ package be.supinfo.supermarketapp.data
 import android.content.Context
 import android.net.ConnectivityManager
 import android.util.Log
+import androidx.annotation.WorkerThread
 import androidx.lifecycle.MutableLiveData
+import be.supinfo.supermarketapp.util.BASE_URL
 import be.supinfo.supermarketapp.util.MyHelper
 import be.supinfo.supermarketapp.util.REPOSITORY_TAG
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class Repository(var app: Context) {
 
@@ -22,8 +29,33 @@ class Repository(var app: Context) {
 
 
     init {
-        getProductsData()
+        // To do a coroutine call we're going to wrap the callWebService call in a bit of code
+        // Dispatchers.IO = do the call in the bg thread
+        // Dispatchers.MAIN = do the call in the UI thread
+        // the function callWebService is called within a Coroutine and it's a BG thread
+        CoroutineScope(Dispatchers.IO).launch { callWebService() }
         Log.i(REPOSITORY_TAG, "${networkAvailable()}")
+    }
+
+    // Workertread means that the function will be called from a background thread, we'll be using coroutine to do that
+    @WorkerThread
+    suspend fun callWebService() {
+        if (networkAvailable()) {
+            // get retrofit from a builder pattern
+            // integrate the moshi library for parsing json, we don't need to create an adapter
+            val retrofit = Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(MoshiConverterFactory.create())
+                .build()
+            // use retrofit object to create an instance of our productservice
+            val service = retrofit.create(ProductService::class.java)
+            // service.getProductsData().body() = returns the data from the webservice
+            val serviceData = service.getProductsData().body() ?: emptyList()
+            // To save the value to the liveData we can't use value or setValue, that property or function can only be
+            // called from an UI thread, instead we call postValue wich is designed to be called from a Background thread
+            products.postValue(serviceData)
+            // because we're using corotuines we don't have to do any callbacks, all the complexity will be done on the bg thread
+        }
     }
 
     fun getProductsData() {
