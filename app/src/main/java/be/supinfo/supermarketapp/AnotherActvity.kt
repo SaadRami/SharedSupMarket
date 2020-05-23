@@ -13,6 +13,7 @@ class AnotherActvity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_smile)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

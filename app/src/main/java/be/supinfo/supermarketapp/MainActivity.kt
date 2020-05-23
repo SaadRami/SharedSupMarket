@@ -26,6 +26,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         findViewById<DrawerLayout>(R.id.drawerLayout)
     }
 
+
+    private lateinit var sb: StringBuilder
+
     private lateinit var viewModel: MyViewModel
     // private var myArray = arrayOf(1, 2, 3, 4)
 
@@ -57,8 +60,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // from the datalive object, call the observe function, this function takes a lifecycle owner (this) + an instance of an observer
         // class that has a single function
         // it : is the value published from the viewModel
-        viewModel.prenom.observe(this, Observer { et_prenom.text = it })
-        viewModel.getProducts()
+
+
+
+
+        viewModel.products.observe(this, Observer {
+//            for (product in it) {
+//                Log.i(VIEWMMODEL_TAG, "${product.productTitle}  (\$${product.price})")
+//            }
+            val sb = StringBuilder()
+            for (product in it) {
+                sb.append("${product.productTitle}  (\$${product.price})")
+                    .append("\n")
+            }
+            tvProducts.text = sb
+        })
+
+
+
+
+        viewModel.prenom.observe(this, Observer { tvTest.text = it })
 
 //        for (i in 0 until myArray.size) {
 //            Log.i(LOG_TAG_INDICES, "$i")
@@ -75,6 +96,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //            println(myView.isVisible)
 //        }
 
+        //viewModel.displayData()
 
         val navView = findViewById<NavigationView>(R.id.nav_view)
 //        val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -95,7 +117,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             goToAnotherActivity()
         }
 
-        //lifecycle.addObserver(MyLifeCycleObserver(LOG_TAG_MAIN_ACTIVITY_DETAILS))
+//        lifecycle.addObserver(MyLifeCycleObserver(LOG_TAG_MAIN_ACTIVITY_DETAILS))
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

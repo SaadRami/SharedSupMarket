@@ -10,8 +10,8 @@ import be.supinfo.supermarketapp.util.VIEWMMODEL_TAG
 class MyViewModel(app: Application) : AndroidViewModel(app) {
 
     // à injecter au moment du run time ultérieurement
-    private val dataRepo: Repository = Repository()
-
+    private val dataRepo: Repository = Repository(app)
+    val products = dataRepo.products
 
 //    Always save the application reference. This is being passed in as the viewModel object is being created,
 //    but it won't persist for the lifetime of the viewModel, and so I'll handle that by creating a new variable here
@@ -26,20 +26,11 @@ class MyViewModel(app: Application) : AndroidViewModel(app) {
     init {
         Log.i(VIEWMMODEL_TAG, "viewmodel")
         // prenom refers to the live data object, to save its value use .value
-        prenom.value = ""
         // By setting a value we're publishing them
     }
 
     fun displayData() {
-        prenom.value = "test"
-    }
-
-
-    fun getProducts() {
-        val products = dataRepo.getData(context)
-        for (product in products) {
-            Log.i(VIEWMMODEL_TAG, "${product.productTitle}  (\$${product.price})")
-        }
+        prenom.value = "tzzefzefzefzefzefzefest"
     }
 
 

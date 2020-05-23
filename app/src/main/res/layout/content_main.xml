@@ -20,13 +20,23 @@
         app:navGraph="@navigation/nav_graph" />
 
     <TextView
-        android:id="@+id/et_prenom"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/tvProducts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:hint="Text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonIntent" />
+
+
+    <TextView
+        android:id="@+id/tvTest"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:hint="Text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonIntent" />
 
     <Button
