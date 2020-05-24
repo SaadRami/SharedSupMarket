@@ -33,8 +33,8 @@ class MyViewModel(app: Application) : AndroidViewModel(app) {
         prenom.value = "tzzefzefzefzefzefzefest"
     }
 
-    fun callWebservice(){
-        dataRepo.performCall()
+    fun refreshProducts(){
+        dataRepo.refreshData()
     }
 
 

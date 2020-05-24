@@ -3,26 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/productsFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="be.supinfo.supermarketapp.ui.main.FirstFragment"
+        android:id="@+id/productsFragment"
+        android:name="be.supinfo.supermarketapp.ui.main.ProductsFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+        tools:layout="@layout/products_fragment">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_go_to_details"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="be.supinfo.supermarketapp.ui.main.SecondFragment"
+        android:id="@+id/detailsFragment"
+        android:name="be.supinfo.supermarketapp.ui.main.DetailsFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        tools:layout="@layout/details_fragment">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_go_back_to_products"
+            app:destination="@id/productsFragment" />
     </fragment>
 </navigation>

@@ -13,7 +13,10 @@ import be.supinfo.supermarketapp.data.Product
 import be.supinfo.supermarketapp.util.JD_IMAGE
 import com.bumptech.glide.Glide
 
-class ProductsRecyclerViewAdapter(val context: Context, val products: List<Product>) :
+class ProductsRecyclerViewAdapter(
+    val context: Context, val products: List<Product>,
+    val itemListener: ProductListener
+) :
     RecyclerView.Adapter<ProductsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,6 +38,8 @@ class ProductsRecyclerViewAdapter(val context: Context, val products: List<Produ
             ratingBar.rating = product.rating.toFloat()
             Glide.with(context).load(JD_IMAGE).into(image)
         }
+
+        holder.itemView.setOnClickListener { itemListener.onItemClick(product) }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -46,5 +51,8 @@ class ProductsRecyclerViewAdapter(val context: Context, val products: List<Produ
     }
 
 
-    
+    interface ProductListener {
+        fun onItemClick(product: Product)
+    }
 }
+

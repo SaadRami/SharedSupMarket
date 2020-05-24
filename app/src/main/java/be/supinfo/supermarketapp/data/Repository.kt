@@ -33,11 +33,11 @@ class Repository(var app: Context) {
         // Dispatchers.IO = do the call in the bg thread
         // Dispatchers.MAIN = do the call in the UI thread
         // the function callWebService is called within a Coroutine and it's a BG thread
-        performCall()
+        refreshData()
         Log.i(REPOSITORY_TAG, "${networkAvailable()}")
     }
 
-    fun performCall() {
+    fun refreshData() {
         CoroutineScope(Dispatchers.IO).launch { callWebService() }
     }
 
@@ -55,6 +55,10 @@ class Repository(var app: Context) {
             val service = retrofit.create(ProductService::class.java)
             // service.getProductsData().body() = returns the data from the webservice
             val serviceData = service.getProductsData().body() ?: emptyList()
+
+            for (product in serviceData) {
+                Log.i(REPOSITORY_TAG, product.title)
+            }
             // To save the value to the liveData we can't use value or setValue, that property or function can only be
             // called from an UI thread, instead we call postValue wich is designed to be called from a Background thread
             products.postValue(serviceData)
