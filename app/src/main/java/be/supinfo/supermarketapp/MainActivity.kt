@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
 
+
 //        prenom_value = savedInstanceState?.getString(ET_PRENOM) ?: ""
 //        et_prenom.setText(prenom_value)
 

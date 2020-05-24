@@ -14,10 +14,8 @@ import be.supinfo.supermarketapp.R
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
-
     private lateinit var viewModel: MyViewModel
     private lateinit var recyclerView: RecyclerView
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

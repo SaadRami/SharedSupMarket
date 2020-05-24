@@ -44,4 +44,7 @@ class ProductsRecyclerViewAdapter(val context: Context, val products: List<Produ
         val ratingBar = itemView.findViewById<RatingBar>(R.id.ratingBar)
         val image = itemView.findViewById<ImageView>(R.id.item_image)
     }
+
+
+    
 }

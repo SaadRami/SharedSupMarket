@@ -33,8 +33,12 @@ class Repository(var app: Context) {
         // Dispatchers.IO = do the call in the bg thread
         // Dispatchers.MAIN = do the call in the UI thread
         // the function callWebService is called within a Coroutine and it's a BG thread
-        CoroutineScope(Dispatchers.IO).launch { callWebService() }
+        performCall()
         Log.i(REPOSITORY_TAG, "${networkAvailable()}")
+    }
+
+    fun performCall() {
+        CoroutineScope(Dispatchers.IO).launch { callWebService() }
     }
 
     // Workertread means that the function will be called from a background thread, we'll be using coroutine to do that
