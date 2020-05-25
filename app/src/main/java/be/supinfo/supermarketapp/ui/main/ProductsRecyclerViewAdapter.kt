@@ -14,8 +14,8 @@ import be.supinfo.supermarketapp.util.JD_IMAGE
 import com.bumptech.glide.Glide
 
 class ProductsRecyclerViewAdapter(
-    val context: Context, val products: List<Product>,
-    val itemListener: ProductListener
+    val context: Context, private val products: List<Product>,
+    private val itemListener: ProductListener
 ) :
     RecyclerView.Adapter<ProductsRecyclerViewAdapter.ViewHolder>() {
 

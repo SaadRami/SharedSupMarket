@@ -22,19 +22,11 @@ import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    // drawer layout will have to be accessible from all functions, its gonna be declared as property (private)
     private val drawerLayout by lazy {
         findViewById<DrawerLayout>(R.id.drawerLayout)
     }
     private lateinit var sb: StringBuilder
     private lateinit var navController: NavController
-    // private var myArray = arrayOf(1, 2, 3, 4)
-
-    // Lazy instantiation
-    // We're only going to initialize the array when we reference it in our code
-    // private val myViews by lazy { arrayOf<View>(fab, toolbar) }
-    // private val myViews by lazy { arrayOf<View>(findViewById(R.id.fab), findViewById(R.id.toolbar) }
-
     private lateinit var fab: FloatingActionButton
     private val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
 
@@ -42,38 +34,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_nav)
         setSupportActionBar(toolbar)
-
-
-//        prenom_value = savedInstanceState?.getString(ET_PRENOM) ?: ""
-//        et_prenom.setText(prenom_value)
-
-
-        //viewModel.prenom.observe(this, Observer { tvTest.text = it })
-
-//        for (i in 0 until myArray.size) {
-//            Log.i(LOG_TAG_INDICES, "$i")
-//        }
-
-        //  text = savedInstanceState.getString(EDITTEXT_VALUE)
-
-//        fab.setOnClickListener {
-//            handleClickFabEvent(it)
-//        }
-
-
-//        for (myView in myViews) {
-//            println(myView.isVisible)
-//        }
-
-        //viewModel.displayData()
-
-
-
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         val navView = findViewById<NavigationView>(R.id.nav_view)
-        //        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        //        setSupportActionBar(toolbar)
-
         navView.setNavigationItemSelectedListener(this)
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar, R.string.open_nav_drawer,
@@ -85,11 +47,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         NavigationUI.setupWithNavController(toolbar, navController, drawerLayout)
 
         fab = findViewById(R.id.fab)
-        //fab.setOnClickListener { viewModel.displayData() }
-
-//        buttonIntent.setOnClickListener {
-//            goToAnotherActivity()
-//        }
 
 //        lifecycle.addObserver(MyLifeCycleObserver(LOG_TAG_MAIN_ACTIVITY_DETAILS))
     }
@@ -125,27 +82,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun handleClickFabEvent(it: View) {
-//        for(i in 0 until collection.size){
-//
-//        }
         MyHelper.blFunction()
         Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG)
             .setAction("Action", null).show()
     }
-
-    override fun onStart() {
-        super.onStart()
-    }
-
-
-    //    override fun onSaveInstanceState(outState: Bundle) {
-//        // Save states in case of orientation changing
-//        outState.putString(ET_PRENOM, et_prenom.text.toString())
-//        super.onSaveInstanceState(outState)
-//    }
-
-//    override fun onBackPressed() {
-//        super.onBackPressed()
-//    }
 
 }

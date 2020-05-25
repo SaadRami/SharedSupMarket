@@ -29,11 +29,6 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-//        (requireActivity() as AppCompatActivity).run {
-//            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        }
-//        setHasOptionsMenu(true)
-
         viewModel = ViewModelProvider(requireActivity()).get(ProductsViewModel::class.java)
         viewModel.selectedProduct.observe(requireActivity(), Observer {
             Log.i(DETAIL_FRAGMENT_TAG, it.description)
@@ -41,25 +36,14 @@ class DetailsFragment : Fragment() {
 
         Log.i(DETAIL_FRAGMENT_TAG, "test")
 
-
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-
 
         val binding = DetailsFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-
         return binding.root
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-//            findNavController().navigate(R.id.action_go_back_to_products)
-//        }
-//    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Log.i(DETAIL_FRAGMENT_TAG, "$item.itemId")
