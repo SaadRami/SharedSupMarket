@@ -2,6 +2,7 @@ package be.supinfo.supermarketapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -10,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import be.supinfo.supermarketapp.util.LOG_MAINACTIVITY
 import be.supinfo.supermarketapp.util.MyHelper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
@@ -21,11 +26,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val drawerLayout by lazy {
         findViewById<DrawerLayout>(R.id.drawerLayout)
     }
-
-
     private lateinit var sb: StringBuilder
-
-
+    private lateinit var navController: NavController
     // private var myArray = arrayOf(1, 2, 3, 4)
 
     // Lazy instantiation
@@ -33,16 +35,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     // private val myViews by lazy { arrayOf<View>(fab, toolbar) }
     // private val myViews by lazy { arrayOf<View>(findViewById(R.id.fab), findViewById(R.id.toolbar) }
 
-
     private lateinit var fab: FloatingActionButton
-
     private val toolbar by lazy { findViewById<Toolbar>(R.id.toolbar) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_nav)
         setSupportActionBar(toolbar)
-
 
 
 //        prenom_value = savedInstanceState?.getString(ET_PRENOM) ?: ""
@@ -68,9 +67,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //viewModel.displayData()
 
+
+
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         val navView = findViewById<NavigationView>(R.id.nav_view)
-//        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-//        setSupportActionBar(toolbar)
+        //        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        //        setSupportActionBar(toolbar)
 
         navView.setNavigationItemSelectedListener(this)
         val toggle = ActionBarDrawerToggle(
@@ -79,6 +81,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+        NavigationUI.setupWithNavController(toolbar, navController, drawerLayout)
 
         fab = findViewById(R.id.fab)
         //fab.setOnClickListener { viewModel.displayData() }
@@ -90,7 +94,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //        lifecycle.addObserver(MyLifeCycleObserver(LOG_TAG_MAIN_ACTIVITY_DETAILS))
     }
 
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        Log.i(LOG_MAINACTIVITY, "test")
         if (item.itemId == R.id.action_about) {
             drawerLayout.closeDrawer(GravityCompat.START)
             AboutActivity.start(this)
@@ -105,11 +111,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.i(LOG_MAINACTIVITY, "test")
         if (item.itemId == R.id.about) {
             AboutActivity.start(this)
             return true
         }
-        return super.onOptionsItemSelected(item)
+        return false
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -131,10 +138,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-//    override fun onSaveInstanceState(outState: Bundle) {
+    //    override fun onSaveInstanceState(outState: Bundle) {
 //        // Save states in case of orientation changing
 //        outState.putString(ET_PRENOM, et_prenom.text.toString())
 //        super.onSaveInstanceState(outState)
+//    }
+
+//    override fun onBackPressed() {
+//        super.onBackPressed()
 //    }
 
 }

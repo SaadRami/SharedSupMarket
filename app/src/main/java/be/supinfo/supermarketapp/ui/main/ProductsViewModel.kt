@@ -4,10 +4,11 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import be.supinfo.supermarketapp.data.Product
 import be.supinfo.supermarketapp.data.Repository
 import be.supinfo.supermarketapp.util.VIEWMMODEL_TAG
 
-class MyViewModel(app: Application) : AndroidViewModel(app) {
+class ProductsViewModel(app: Application) : AndroidViewModel(app) {
 
     // à injecter au moment du run time ultérieurement
     private val dataRepo: Repository = Repository(app)
@@ -19,6 +20,7 @@ class MyViewModel(app: Application) : AndroidViewModel(app) {
 //    or do other things that are part of the Android structure.
 
     val prenom = MutableLiveData<String>()
+    val selectedProduct = MutableLiveData<Product>()
     private val context = app
 
     // This is where we're going to store our data
@@ -33,7 +35,7 @@ class MyViewModel(app: Application) : AndroidViewModel(app) {
         prenom.value = "tzzefzefzefzefzefzefest"
     }
 
-    fun refreshProducts(){
+    fun refreshProducts() {
         dataRepo.refreshData()
     }
 

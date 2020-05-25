@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="be.supinfo.supermarketapp.ui.main.DetailsFragment"
+        android:name="be.supinfo.supermarketapp.ui.details.DetailsFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/details_fragment">
         <action

@@ -20,7 +20,7 @@ import be.supinfo.supermarketapp.util.FRAGMENT_TAG
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener {
-    private lateinit var viewModel: MyViewModel
+    private lateinit var viewModel: ProductsViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var navController: NavController
@@ -30,6 +30,10 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
         savedInstanceState: Bundle?
     ): View? {
 
+//        (requireActivity() as AppCompatActivity).run {
+//            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        }
+        setHasOptionsMenu(true)
 
         // SUBSCRIBE TO CHANGES IN VM DATA
         // To Subscrie to changes in a ViewModel's data
@@ -48,7 +52,7 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
 
         // Creating and attaching a viewModel to an Activity
         // ViewModelProvider is responsible of instatiating the viewmodel an return its reference
-        viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(ProductsViewModel::class.java)
         viewModel.products.observe(viewLifecycleOwner, Observer {
 //            for (product in it) {
 //                Log.i(VIEWMMODEL_TAG, "${product.productTitle}  (\$${product.price})")
@@ -58,7 +62,6 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
                 requireContext(),
                 it, this
             )
-
             recyclerView.adapter = adapter
             swipeRefresh.isRefreshing = false
 //            val sb = StringBuilder()
@@ -91,5 +94,8 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
     override fun onItemClick(product: Product) {
         Log.i(FRAGMENT_TAG, product.title)
         navController.navigate(R.id.action_go_to_details)
+        viewModel.selectedProduct.value = product
     }
+
+
 }
