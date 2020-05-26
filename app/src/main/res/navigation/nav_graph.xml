@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/productsFragment"
         android:name="be.supinfo.supermarketapp.ui.main.ProductsFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/app_name"
         tools:layout="@layout/products_fragment">
         <action
             android:id="@+id/action_go_to_details"
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="be.supinfo.supermarketapp.ui.details.DetailsFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/products_details_fragment"
         tools:layout="@layout/details_fragment">
         <action
             android:id="@+id/action_go_back_to_products"

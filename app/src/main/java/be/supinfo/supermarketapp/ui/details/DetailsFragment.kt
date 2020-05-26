@@ -14,7 +14,7 @@ import androidx.navigation.Navigation
 import be.supinfo.supermarketapp.R
 import be.supinfo.supermarketapp.databinding.DetailsFragmentBinding
 import be.supinfo.supermarketapp.ui.main.ProductsViewModel
-import be.supinfo.supermarketapp.util.DETAIL_FRAGMENT_TAG
+import be.supinfo.supermarketapp.util.TAG_DETAIL_FRAGMENT
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -29,12 +29,16 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+//        (requireActivity() as AppCompatActivity).run {
+//            supportActionBar?.show()
+//        }
+
         viewModel = ViewModelProvider(requireActivity()).get(ProductsViewModel::class.java)
         viewModel.selectedProduct.observe(requireActivity(), Observer {
-            Log.i(DETAIL_FRAGMENT_TAG, it.description)
+            Log.i(TAG_DETAIL_FRAGMENT, it.description)
         })
 
-        Log.i(DETAIL_FRAGMENT_TAG, "test")
+        Log.i(TAG_DETAIL_FRAGMENT, "test")
 
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
@@ -46,7 +50,7 @@ class DetailsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.i(DETAIL_FRAGMENT_TAG, "$item.itemId")
+        Log.i(TAG_DETAIL_FRAGMENT, "$item.itemId")
         if (item.itemId == android.R.id.home) {
             navController.navigateUp()
         }

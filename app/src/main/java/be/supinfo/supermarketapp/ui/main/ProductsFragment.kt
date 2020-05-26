@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import be.supinfo.supermarketapp.R
 import be.supinfo.supermarketapp.data.Product
-import be.supinfo.supermarketapp.util.FRAGMENT_TAG
+import be.supinfo.supermarketapp.util.TAG_FRAGMENT
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -29,6 +29,9 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+//        (requireActivity() as AppCompatActivity).run {
+//            supportActionBar?.show()
+//        }
 
         val view = inflater.inflate(R.layout.products_fragment, container, false)
         recyclerView = view.findViewById(R.id.rvProductList)
@@ -56,7 +59,7 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
 
 
     override fun onItemClick(product: Product) {
-        Log.i(FRAGMENT_TAG, product.title)
+        Log.i(TAG_FRAGMENT, product.title)
         navController.navigate(R.id.action_go_to_details)
         viewModel.selectedProduct.value = product
     }

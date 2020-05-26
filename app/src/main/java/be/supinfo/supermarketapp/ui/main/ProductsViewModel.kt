@@ -1,24 +1,28 @@
 package be.supinfo.supermarketapp.ui.main
 
+import android.app.Activity
 import android.app.Application
 import android.util.Log
+import android.widget.LinearLayout
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import be.supinfo.supermarketapp.data.Product
 import be.supinfo.supermarketapp.data.Repository
-import be.supinfo.supermarketapp.util.VIEWMMODEL_TAG
+import be.supinfo.supermarketapp.util.TAG_VIEWMODEL
 
 class ProductsViewModel(app: Application) : AndroidViewModel(app) {
 
 
     private val dataRepo: Repository = Repository(app)
-    val products = dataRepo.products
+    val products = dataRepo.LDProducts
     val prenom = MutableLiveData<String>()
     val selectedProduct = MutableLiveData<Product>()
     private val context = app
 
+
+
     init {
-        Log.i(VIEWMMODEL_TAG, "viewmodel")
+        Log.i(TAG_VIEWMODEL, "viewmodel")
     }
 
     fun displayData() {

@@ -1,9 +1,13 @@
 package be.supinfo.supermarketapp.data
 
-import be.supinfo.supermarketapp.util.BASE_URL
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
+@Entity(tableName = "Products")
 data class Product(
+    @PrimaryKey(autoGenerate = true)
+    val productId: Int,
     @Json(name = "title") val title: String,
     @Json(name = "type") val type: String,
     @Json(name = "description") val description: String,
@@ -14,5 +18,6 @@ data class Product(
     @Json(name = "rating") val rating: Int
 ) {
     val imageUrl
-        get() = "$BASE_URL/$filename"
+        //        get() = "$BASE_URL/$filename"
+        get() = "https://ws.mcdonalds.fr/media/a7/cc/2b/a7cc2b7a1ef57acc4d6aff1252f21c16b27242ca"
 }

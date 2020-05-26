@@ -10,14 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import be.supinfo.supermarketapp.R
 import be.supinfo.supermarketapp.data.Product
-import be.supinfo.supermarketapp.util.JD_IMAGE
 import com.bumptech.glide.Glide
+import java.text.NumberFormat
 
 class ProductsRecyclerViewAdapter(
     val context: Context, private val products: List<Product>,
     private val itemListener: ProductListener
 ) :
     RecyclerView.Adapter<ProductsRecyclerViewAdapter.ViewHolder>() {
+
+    private val formatter: NumberFormat = NumberFormat.getCurrencyInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -33,10 +35,10 @@ class ProductsRecyclerViewAdapter(
         with(holder) {
             title.text = product.title
             description.text = product.description
-            //price.text = product.price.toString()
-            price.text = "${product.price} €"
+            price.text = formatter.format(product.price)
+//            price.text = "${product.price} €"
             ratingBar.rating = product.rating.toFloat()
-            Glide.with(context).load(JD_IMAGE).into(image)
+            Glide.with(context).load(product.imageUrl).into(image)
         }
 
         holder.itemView.setOnClickListener { itemListener.onItemClick(product) }
