@@ -33,4 +33,8 @@
         android:name="be.supinfo.supermarketapp.ui.splash.SplashActivity"
         android:label="activity_splash"
         tools:layout="@layout/activity_splash" />
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="be.supinfo.supermarketapp.SettingsActivity"
+        android:label="SettingsActivity" />
 </navigation>

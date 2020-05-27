@@ -20,5 +20,5 @@ data class Product(
 ) {
     val imageUrl
         //        get() = "$BASE_URL/$filename"
-        get() = "https://cdn-prod.scalefast.com/public/assets/img/resized/squareenix-store-v3/29a4af7a80c8aba3cb93218ef6cde90d_640_640_Q10.jpg"
+        get() = "https://logodix.com/logo/1038765.png"
 }

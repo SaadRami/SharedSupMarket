@@ -74,10 +74,18 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
             swipeRefresh.isRefreshing = false
         })
 
+        viewModel.appTitle.observe(viewLifecycleOwner, Observer {
+            requireActivity().title = it
+        })
+
         // Inflate the layout for this fragment
         return view
     }
 
+    override fun onResume() {
+        viewModel.updateTitle()
+        super.onResume()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.findItem(R.id.about).isVisible = false
@@ -90,13 +98,16 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
         when (item.itemId) {
             R.id.menu_grid_item -> {
                 MyHelper.setDisplayMode(requireContext(), DISPLAY_GRID)
-                recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+                recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                 recyclerView.adapter = adapter
             }
             R.id.menu_list_item -> {
                 MyHelper.setDisplayMode(requireContext(), DISPLAY_LIST)
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 recyclerView.adapter = adapter
+            }
+            R.id.settings -> {
+                navController.navigate(R.id.settingsActivity)
             }
         }
         return super.onOptionsItemSelected(item)

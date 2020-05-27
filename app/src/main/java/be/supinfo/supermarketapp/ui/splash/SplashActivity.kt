@@ -2,6 +2,7 @@ package be.supinfo.supermarketapp.ui.splash
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import be.supinfo.supermarketapp.MainActivity
 import be.supinfo.supermarketapp.R
 import com.google.android.material.snackbar.Snackbar
 
@@ -63,7 +65,9 @@ class SplashActivity : AppCompatActivity() {
             // Start your app main activity
             //  startActivity(Intent(this, MainActivity::class.java))
             // close this activity
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
+
         }, splashTimeOut)
     }
 
