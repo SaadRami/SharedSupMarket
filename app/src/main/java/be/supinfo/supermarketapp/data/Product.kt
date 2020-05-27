@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 
+// POJO
 @Entity(tableName = "Products")
 data class Product(
     @PrimaryKey(autoGenerate = true)
@@ -19,5 +20,5 @@ data class Product(
 ) {
     val imageUrl
         //        get() = "$BASE_URL/$filename"
-        get() = "https://ws.mcdonalds.fr/media/a7/cc/2b/a7cc2b7a1ef57acc4d6aff1252f21c16b27242ca"
+        get() = "https://cdn-prod.scalefast.com/public/assets/img/resized/squareenix-store-v3/29a4af7a80c8aba3cb93218ef6cde90d_640_640_Q10.jpg"
 }

@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main2, menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 

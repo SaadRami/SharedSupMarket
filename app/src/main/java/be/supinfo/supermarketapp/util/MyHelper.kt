@@ -6,6 +6,7 @@ import java.io.File
 
 const val ITEM_STRING = "item_string"
 
+
 class MyHelper {
 
     companion object {
@@ -47,12 +48,12 @@ class MyHelper {
         private fun preferences(context: Context): SharedPreferences =
             context.getSharedPreferences("default", 0)
 
-        fun setStringElement(context: Context, data: String) {
+        fun setDisplayMode(context: Context, data: String) {
             preferences(context).edit().putString(ITEM_STRING, data).apply()
         }
 
-        fun getStringElement(context: Context): String =
-            preferences(context).getString(ITEM_STRING, "test")!!
+        fun getDisplayMode(context: Context): String =
+            preferences(context).getString(ITEM_STRING, "displayMode")!!
 
 
     }

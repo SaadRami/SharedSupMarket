@@ -6,21 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/list_item_background"
-    android:clickable="true"
+    android:clickable="false"
     android:focusable="true"
     android:padding="@dimen/product_list_item_padding">
 
     <ImageView
         android:id="@+id/item_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
         android:clickable="false"
         android:focusable="true"
         android:src="@drawable/ic_store"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,20 +26,19 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
 
+        android:layout_height="wrap_content"
         android:padding="@dimen/product_list_item_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/item_image"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_image">
 
 
         <TextView
             android:id="@+id/item_title"
             style="bold"
-            android:layout_width="254dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="2dp"
             android:textSize="16sp"
@@ -70,7 +67,7 @@
         <TextView
             android:id="@+id/item_price"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:padding="2dp"
@@ -83,7 +80,7 @@
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"

@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import be.supinfo.supermarketapp.R
 import be.supinfo.supermarketapp.data.Product
+import be.supinfo.supermarketapp.util.MyHelper
 import com.bumptech.glide.Glide
 import java.text.NumberFormat
 
@@ -23,7 +24,14 @@ class ProductsRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.product_list_item, parent, false)
+
+        val holderLayoutRes = if (MyHelper.getDisplayMode(context) == DISPLAY_LIST) {
+            R.layout.product_list_item
+        } else {
+            R.layout.product_grid_item
+        }
+
+        val view = inflater.inflate(holderLayoutRes, parent, false)
 
         return ViewHolder(view)
     }

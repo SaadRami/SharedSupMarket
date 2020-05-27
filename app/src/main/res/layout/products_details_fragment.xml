@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/ivImage_details"
-            android:layout_width="200dp"
-            android:layout_height="150dp"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="196dp"
             app:imageUrl="@{viewModel.selectedProduct.imageUrl}"

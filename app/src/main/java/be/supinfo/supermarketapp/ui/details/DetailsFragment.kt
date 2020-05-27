@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import be.supinfo.supermarketapp.R
-import be.supinfo.supermarketapp.databinding.DetailsFragmentBinding
+import be.supinfo.supermarketapp.databinding.ProductsDetailsFragmentBinding
 import be.supinfo.supermarketapp.ui.main.ProductsViewModel
 import be.supinfo.supermarketapp.util.TAG_DETAIL_FRAGMENT
 
@@ -42,7 +42,7 @@ class DetailsFragment : Fragment() {
 
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
-        val binding = DetailsFragmentBinding.inflate(inflater, container, false)
+        val binding = ProductsDetailsFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
