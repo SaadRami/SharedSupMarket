@@ -2,6 +2,8 @@ package be.supinfo.supermarketapp.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.ConnectivityManager
+import be.supinfo.supermarketapp.App
 import java.io.File
 
 const val ITEM_STRING = "item_string"
@@ -54,6 +56,7 @@ class MyHelper {
 
         fun getDisplayMode(context: Context): String =
             preferences(context).getString(ITEM_STRING, "displayMode")!!
+
 
 
     }

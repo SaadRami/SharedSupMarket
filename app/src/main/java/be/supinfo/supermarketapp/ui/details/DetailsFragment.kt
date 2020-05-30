@@ -20,7 +20,6 @@ import be.supinfo.supermarketapp.util.TAG_DETAIL_FRAGMENT
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class DetailsFragment : Fragment() {
-
     private lateinit var navController: NavController
     private lateinit var viewModel: ProductsViewModel
 

@@ -1,9 +1,10 @@
-package be.supinfo.supermarketapp.data
+package be.supinfo.supermarketapp.data.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import be.supinfo.supermarketapp.data.remote.Product
 
 // Add an anotation
 // entities list of classes (entities)

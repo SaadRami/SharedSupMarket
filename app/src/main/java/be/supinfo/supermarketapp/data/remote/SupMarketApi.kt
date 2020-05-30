@@ -1,9 +1,9 @@
-package be.supinfo.supermarketapp.data
+package be.supinfo.supermarketapp.data.remote
 
 import retrofit2.Response
 import retrofit2.http.GET
 
-interface ProductService {
+interface SupMarketApi {
     @GET("/")
     suspend fun getProductsData(): Response<List<Product>>
 

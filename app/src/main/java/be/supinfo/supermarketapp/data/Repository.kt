@@ -9,6 +9,9 @@ import android.widget.Toast
 import androidx.annotation.WorkerThread
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
+import be.supinfo.supermarketapp.data.local.AppDatabase
+import be.supinfo.supermarketapp.data.remote.Product
+import be.supinfo.supermarketapp.data.remote.SupMarketApi
 import be.supinfo.supermarketapp.util.BASE_URL
 import be.supinfo.supermarketapp.util.MyHelper
 import be.supinfo.supermarketapp.util.TAG_REPOSITORY
@@ -75,7 +78,7 @@ class Repository(var app: Context) {
                 .addConverterFactory(MoshiConverterFactory.create())
                 .build()
 
-            val service = retrofit.create(ProductService::class.java)
+            val service = retrofit.create(SupMarketApi::class.java)
             val serviceData = service.getProductsData().body() ?: emptyList()
 
             for (product in serviceData) {
@@ -122,11 +125,12 @@ class Repository(var app: Context) {
         LDProducts.value = adapter.fromJson(dataFromAssets) ?: emptyList()
     }
 
-
     private fun networkAvailable(): Boolean {
         val connectivityManager = app.getSystemService(Context.CONNECTIVITY_SERVICE)
                 as ConnectivityManager
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo?.isConnectedOrConnecting ?: false
     }
+
+
 }

@@ -9,7 +9,7 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import be.supinfo.supermarketapp.R
-import be.supinfo.supermarketapp.data.Product
+import be.supinfo.supermarketapp.data.remote.Product
 import be.supinfo.supermarketapp.util.MyHelper
 import com.bumptech.glide.Glide
 import java.text.NumberFormat

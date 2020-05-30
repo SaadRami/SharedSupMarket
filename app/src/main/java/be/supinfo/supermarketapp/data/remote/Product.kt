@@ -1,4 +1,4 @@
-package be.supinfo.supermarketapp.data
+package be.supinfo.supermarketapp.data.remote
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
