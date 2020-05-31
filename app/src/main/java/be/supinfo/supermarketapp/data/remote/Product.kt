@@ -18,7 +18,7 @@ data class Product(
     @Json(name = "price") val price: Double,
     @Json(name = "rating") val rating: Int
 ) {
-    val imageUrl
+    val imageUrl: String
         //        get() = "$BASE_URL/$filename"
         get() = "https://logodix.com/logo/1038765.png"
 }

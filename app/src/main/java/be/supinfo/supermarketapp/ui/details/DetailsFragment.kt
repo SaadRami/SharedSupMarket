@@ -8,42 +8,49 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import be.supinfo.supermarketapp.App
 import be.supinfo.supermarketapp.R
 import be.supinfo.supermarketapp.databinding.ProductsDetailsFragmentBinding
-import be.supinfo.supermarketapp.ui.main.ProductsViewModel
 import be.supinfo.supermarketapp.util.TAG_DETAIL_FRAGMENT
+import be.supinfo.supermarketapp.util.ViewModelFactory
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class DetailsFragment : Fragment() {
     private lateinit var navController: NavController
-    private lateinit var viewModel: ProductsViewModel
+    private lateinit var productsDetailsViewModel: ProductsDetailsViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 //        (requireActivity() as AppCompatActivity).run {
 //            supportActionBar?.show()
 //        }
 
-        viewModel = ViewModelProvider(requireActivity()).get(ProductsViewModel::class.java)
-        viewModel.selectedProduct.observe(requireActivity(), Observer {
-            Log.i(TAG_DETAIL_FRAGMENT, it.description)
-        })
+        App.component.inject(this)
 
-        Log.i(TAG_DETAIL_FRAGMENT, "test")
+        productsDetailsViewModel =
+            ViewModelProviders.of(this, viewModelFactory)
+                .get(ProductsDetailsViewModel::class.java)
+
+        productsDetailsViewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
+            Log.i(TAG_DETAIL_FRAGMENT, it.description) /* <- HERE IS THE PROBLEM, THIS CODE BLOCK DOESNT RUN, THE OBSERVER DONT GET DATA FROM OBSERVABLE (MUTABLELIVEDATA) */
+        })
 
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
         val binding = ProductsDetailsFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding.viewModel = productsDetailsViewModel
 
         return binding.root
     }
@@ -55,6 +62,4 @@ class DetailsFragment : Fragment() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-
 }

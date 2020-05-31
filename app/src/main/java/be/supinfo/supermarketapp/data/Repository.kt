@@ -1,6 +1,7 @@
 package be.supinfo.supermarketapp.data
 
 import android.Manifest
+import android.app.Application
 import android.content.Context
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
@@ -9,10 +10,10 @@ import android.widget.Toast
 import androidx.annotation.WorkerThread
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
-import be.supinfo.supermarketapp.data.local.AppDatabase
+import be.supinfo.supermarketapp.App
+import be.supinfo.supermarketapp.data.local.ProductDao
 import be.supinfo.supermarketapp.data.remote.Product
 import be.supinfo.supermarketapp.data.remote.SupMarketApi
-import be.supinfo.supermarketapp.util.BASE_URL
 import be.supinfo.supermarketapp.util.MyHelper
 import be.supinfo.supermarketapp.util.TAG_REPOSITORY
 import com.squareup.moshi.JsonAdapter
@@ -24,20 +25,31 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.inject.Inject
 
-class Repository(var app: Context) {
-    val LDProducts = MutableLiveData<List<Product>>()
+class Repository {
+    val productsLiveData = MutableLiveData<List<Product>>()
     private val listType = Types.newParameterizedType(List::class.java, Product::class.java)
-    private val dataBase = AppDatabase.getDatabase(app).productDao()
+
+    //   private val dataBase = AppDatabase.getDatabase(app).productDao()
+    @Inject
+    lateinit var retrofit: Retrofit
+
+    @Inject
+    lateinit var productDao: ProductDao
+
+    @Inject
+    lateinit var app: Application
 
     init {
+        App.component.inject(this)
+
         CoroutineScope(Dispatchers.IO).launch {
-            val data = dataBase.getAll()
+            val data = productDao.getAll()
             if (data.isEmpty()) {
                 callWebService()
             } else {
-                LDProducts.postValue(data)
+                productsLiveData.postValue(data)
                 Log.i(TAG_REPOSITORY, "From Room database")
                 //Coroutine lets you switch threads in the fly
                 withContext(Dispatchers.Main) {
@@ -62,6 +74,7 @@ class Repository(var app: Context) {
     }
 
     fun refreshData() {
+        Log.i(TAG_REPOSITORY, "oscour")
         CoroutineScope(Dispatchers.IO).launch { callWebService() }
     }
 
@@ -73,11 +86,10 @@ class Repository(var app: Context) {
                 Toast.makeText(app, "Get Data From Remote", Toast.LENGTH_LONG)
                     .show()
             }
-            val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create())
-                .build()
-
+//            val retrofit = Retrofit.Builder()
+//                .baseUrl(BASE_URL)
+//                .addConverterFactory(MoshiConverterFactory.create())
+//                .build()
             val service = retrofit.create(SupMarketApi::class.java)
             val serviceData = service.getProductsData().body() ?: emptyList()
 
@@ -85,10 +97,10 @@ class Repository(var app: Context) {
                 Log.i(TAG_REPOSITORY, product.title)
             }
 
-            LDProducts.postValue(serviceData)
+            productsLiveData.postValue(serviceData)
             //saveDataToCache(serviceData)
-            dataBase.deleteAll()
-            dataBase.insertProducts(serviceData)
+            productDao.deleteAll()
+            productDao.insertProducts(serviceData)
         }
     }
 
@@ -122,7 +134,7 @@ class Repository(var app: Context) {
         val dataFromAssets = MyHelper.getDataFromAssets(app, "products_data.json")
         val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
         val adapter: JsonAdapter<List<Product>> = moshi.adapter(listType)
-        LDProducts.value = adapter.fromJson(dataFromAssets) ?: emptyList()
+        productsLiveData.value = adapter.fromJson(dataFromAssets) ?: emptyList()
     }
 
     private fun networkAvailable(): Boolean {
@@ -131,6 +143,5 @@ class Repository(var app: Context) {
         val networkInfo = connectivityManager.activeNetworkInfo
         return networkInfo?.isConnectedOrConnecting ?: false
     }
-
 
 }

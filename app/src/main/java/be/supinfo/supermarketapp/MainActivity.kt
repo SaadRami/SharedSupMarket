@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main_nav)
         setSupportActionBar(toolbar)
 
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         val navView = findViewById<NavigationView>(R.id.nav_view)
         navView.setNavigationItemSelectedListener(this)

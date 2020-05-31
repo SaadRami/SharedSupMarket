@@ -24,16 +24,12 @@ class ProductsRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-
-
         val holderLayoutRes = if (MyHelper.getDisplayMode(context) == DISPLAY_GRID) {
             R.layout.product_grid_item
         } else {
             R.layout.product_list_item
         }
-
         val view = inflater.inflate(holderLayoutRes, parent, false)
-
         return ViewHolder(view)
     }
 
@@ -49,7 +45,6 @@ class ProductsRecyclerViewAdapter(
             ratingBar.rating = product.rating.toFloat()
             Glide.with(context).load(product.imageUrl).into(image)
         }
-
         holder.itemView.setOnClickListener { itemListener.onItemClick(product) }
     }
 
@@ -60,7 +55,6 @@ class ProductsRecyclerViewAdapter(
         val ratingBar = itemView.findViewById<RatingBar>(R.id.ratingBar)
         val image = itemView.findViewById<ImageView>(R.id.item_image)
     }
-
 
     interface ProductListener {
         fun onItemClick(product: Product)

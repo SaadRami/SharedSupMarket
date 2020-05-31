@@ -1,37 +1,40 @@
 package be.supinfo.supermarketapp.ui.main
 
-import android.app.Application
+import android.content.SharedPreferences
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import be.supinfo.supermarketapp.App
 import be.supinfo.supermarketapp.data.Repository
-import be.supinfo.supermarketapp.data.remote.Product
 import be.supinfo.supermarketapp.util.TAG_VIEWMODEL
+import javax.inject.Inject
 
-class ProductsViewModel constructor(context: Application) :
-    AndroidViewModel(context) {
+class ProductsViewModel @Inject constructor(private val repository: Repository) :
+    ViewModel(), LifecycleObserver {
 
-    private val dataRepo: Repository = Repository(context)
+    // private val dataRepo: Repository = Repository()
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
-
-    val products = dataRepo.LDProducts
-    val prenom = MutableLiveData<String>()
-    val selectedProduct = MutableLiveData<Product>()
+    private val prenom = MutableLiveData<String>()
+    val products = repository.productsLiveData
+    //val selectedProduct = MutableLiveData<Product>()
 
     //private val context = app
     val appTitle = MutableLiveData<String>()
 
 
     init {
-
+        App.component.inject(this)
         Log.i(TAG_VIEWMODEL, "viewmodel")
-        //updateTitle()
+        updateTitle()
     }
 
     fun updateTitle() {
-//        val signature =
-//            PreferenceManager.getDefaultSharedPreferences(context).getString("signature", "Client")
-//        appTitle.value = "Client : $signature"
+        val signature =
+            sharedPreferences.getString("signature", "Client")
+        appTitle.value = "Client : $signature"
     }
 
     fun displayData() {
@@ -39,6 +42,7 @@ class ProductsViewModel constructor(context: Application) :
     }
 
     fun refreshProducts() {
-        dataRepo.refreshData()
+        repository.refreshData()
     }
+
 }

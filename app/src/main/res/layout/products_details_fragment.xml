@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="be.supinfo.supermarketapp.ui.main.ProductsViewModel" />
+            type="be.supinfo.supermarketapp.ui.details.ProductsDetailsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
