@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import be.supinfo.supermarketapp.App
@@ -24,6 +24,7 @@ import javax.inject.Inject
 class DetailsFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var productsDetailsViewModel: ProductsDetailsViewModel
+    //private lateinit var sharedViewModel: SharedViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -35,16 +36,26 @@ class DetailsFragment : Fragment() {
 //        (requireActivity() as AppCompatActivity).run {
 //            supportActionBar?.show()
 //        }
-
         App.component.inject(this)
 
+//        sharedViewModel =
+//            ViewModelProvider(requireActivity(), viewModelFactory)
+//                .get(SharedViewModel::class.java)
+
         productsDetailsViewModel =
-            ViewModelProviders.of(this, viewModelFactory)
-                .get(ProductsDetailsViewModel::class.java)
+            ViewModelProvider(
+                requireActivity(),
+                viewModelFactory
+            ).get(ProductsDetailsViewModel::class.java)
 
         productsDetailsViewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
-            Log.i(TAG_DETAIL_FRAGMENT, it.description) /* <- HERE IS THE PROBLEM, THIS CODE BLOCK DOESNT RUN, THE OBSERVER DONT GET DATA FROM OBSERVABLE (MUTABLELIVEDATA) */
+            Log.i(
+                TAG_DETAIL_FRAGMENT,
+                it.description
+            ) /* <- HERE IS THE PROBLEM, THIS CODE BLOCK DOESNT RUN, THE OBSERVER DONT GET DATA FROM OBSERVABLE (MUTABLELIVEDATA) */
         })
+
+        requireActivity().title = productsDetailsViewModel.selectedProduct.value?.title
 
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 

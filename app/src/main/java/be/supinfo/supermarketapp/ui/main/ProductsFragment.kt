@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -31,6 +31,8 @@ const val DISPLAY_GRID = "grid"
 class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener {
     private lateinit var productsViewModel: ProductsViewModel
     private lateinit var productsDetailsViewModel: ProductsDetailsViewModel
+
+    // private lateinit var sharedViewModel: SharedViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var navController: NavController
@@ -40,14 +42,12 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         setHasOptionsMenu(true)
-
 
         val view = inflater.inflate(R.layout.products_fragment, container, false)
 
@@ -66,17 +66,27 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
             else -> LinearLayoutManager(requireContext())
         }
 
+//        sharedViewModel =
+//            ViewModelProvider(requireActivity(), viewModelFactory).get(SharedViewModel::class.java)
+
+
+        productsDetailsViewModel =
+            ViewModelProvider(
+                requireActivity(),
+                viewModelFactory
+            ).get(ProductsDetailsViewModel::class.java)
+
+        productsViewModel =
+            ViewModelProvider(
+                requireActivity(),
+                viewModelFactory
+            ).get(ProductsViewModel::class.java)
+
         swipeRefresh = view.findViewById(R.id.srRefreshProducts)
         swipeRefresh.setOnRefreshListener { productsViewModel.refreshProducts() }
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
-        productsDetailsViewModel =
-            ViewModelProviders.of(this, viewModelFactory)
-                .get(ProductsDetailsViewModel::class.java)
 
-        productsViewModel =
-            ViewModelProviders.of(this, viewModelFactory)
-                .get(ProductsViewModel::class.java)
         // productsViewModel = ViewModelProvider(requireActivity()).get(ProductsViewModel::class.java)
 
         productsViewModel.products.observe(viewLifecycleOwner, Observer {
@@ -86,6 +96,7 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
             )
             recyclerView.adapter = adapter
             swipeRefresh.isRefreshing = false
+            Log.i(TAG_FRAGMENT, "Observer notified")
         })
 
         Log.i(TAG_FRAGMENT, "${productsViewModel.products.hasActiveObservers()}")
@@ -133,7 +144,11 @@ class ProductsFragment : Fragment(), ProductsRecyclerViewAdapter.ProductListener
     override fun onItemClick(product: Product) {
         Log.i(TAG_FRAGMENT, product.description)
         // productsViewModel.selectedProduct.value = product
+//        productsDetailsViewModel =
+//            ViewModelProviders.of(this, viewModelFactory)
+//                .get(ProductsDetailsViewModel::class.java)
         productsDetailsViewModel.selectProduct(product)
         navController.navigate(R.id.action_go_to_details)
+
     }
 }

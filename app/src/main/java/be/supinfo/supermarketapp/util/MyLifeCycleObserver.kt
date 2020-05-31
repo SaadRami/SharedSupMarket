@@ -5,7 +5,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 
-class MyLifeCycleObserver (val tag: String) : LifecycleObserver {
+class MyLifeCycleObserver(val tag: String) : LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreateCallBack() {
         Log.i(tag, "onCreate()")
