@@ -6,9 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import be.supinfo.supermarketapp.data.Repository
 import be.supinfo.supermarketapp.data.remote.Product
-import javax.inject.Inject
 
-class ProductsDetailsViewModel @Inject constructor(private val repository: Repository) :
+class ProductsDetailsViewModel(private val repository: Repository) :
     ViewModel(),
     LifecycleObserver {
     val selectedProduct = MutableLiveData<Product>()

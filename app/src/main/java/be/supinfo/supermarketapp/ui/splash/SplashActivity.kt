@@ -15,7 +15,7 @@ import be.supinfo.supermarketapp.MainActivity
 import be.supinfo.supermarketapp.R
 import com.google.android.material.snackbar.Snackbar
 
-const val splashTimeOut: Long = 1000L
+const val SPLASH_TIME_OUT: Long = 1000L
 const val REQUEST_PERMISSION_CODE = 13
 
 
@@ -68,7 +68,7 @@ class SplashActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
 
-        }, splashTimeOut)
+        }, SPLASH_TIME_OUT)
     }
 
 }

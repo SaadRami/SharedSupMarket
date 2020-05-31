@@ -10,7 +10,7 @@ import be.supinfo.supermarketapp.data.Repository
 import be.supinfo.supermarketapp.util.TAG_VIEWMODEL
 import javax.inject.Inject
 
-class ProductsViewModel @Inject constructor(private val repository: Repository) :
+class ProductsViewModel(private val repository: Repository) :
     ViewModel(), LifecycleObserver {
 
     // private val dataRepo: Repository = Repository()
