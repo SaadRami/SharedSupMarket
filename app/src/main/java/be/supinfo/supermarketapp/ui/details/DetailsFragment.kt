@@ -2,16 +2,14 @@ package be.supinfo.supermarketapp.ui.details
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import be.supinfo.supermarketapp.App
+import be.supinfo.supermarketapp.MainActivity
 import be.supinfo.supermarketapp.R
 import be.supinfo.supermarketapp.databinding.ProductsDetailsFragmentBinding
 import be.supinfo.supermarketapp.util.TAG_DETAIL_FRAGMENT
@@ -36,6 +34,8 @@ class DetailsFragment : Fragment() {
 //        (requireActivity() as AppCompatActivity).run {
 //            supportActionBar?.show()
 //        }
+        setUpDetailsFragment()
+
         App.component.inject(this)
 
 //        sharedViewModel =
@@ -49,10 +49,7 @@ class DetailsFragment : Fragment() {
             ).get(ProductsDetailsViewModel::class.java)
 
         productsDetailsViewModel.selectedProduct.observe(viewLifecycleOwner, Observer {
-            Log.i(
-                TAG_DETAIL_FRAGMENT,
-                it.description
-            ) /* <- HERE IS THE PROBLEM, THIS CODE BLOCK DOESNT RUN, THE OBSERVER DONT GET DATA FROM OBSERVABLE (MUTABLELIVEDATA) */
+            (requireActivity() as MainActivity).updateTitle(it.title)
         })
 
         requireActivity().title = productsDetailsViewModel.selectedProduct.value?.title
@@ -66,10 +63,25 @@ class DetailsFragment : Fragment() {
         return binding.root
     }
 
+    private fun setUpDetailsFragment() {
+        (requireActivity() as MainActivity).run {
+            activateToolBar(false)
+            //showToolbar()
+            manageFabVisibility(false)
+            setDrawerEnabled(false)
+        }
+        setHasOptionsMenu(true)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.findItem(R.id.menu_settings).isVisible = false
+        super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Log.i(TAG_DETAIL_FRAGMENT, "$item.itemId")
-        if (item.itemId == android.R.id.home) {
-            navController.navigateUp()
+        when (item.itemId) {
+            android.R.id.home -> navController.navigateUp()
         }
         return super.onOptionsItemSelected(item)
     }

@@ -1,6 +1,5 @@
 package be.supinfo.supermarketapp.ui.details
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import be.supinfo.supermarketapp.data.Repository
@@ -13,8 +12,9 @@ class ProductsDetailsViewModel(private val repository: Repository) :
     init {
     }
 
-    fun selectProduct(product: Product) {
-        selectedProduct.value = product
-        Log.i("oscour", "${selectedProduct.value?.description}")
-    }
+//    fun selectProduct(product: Product) {
+//        selectedProduct.value = product
+//        Log.i("oscour", "${selectedProduct.value?.description}")
+//    }
+
 }

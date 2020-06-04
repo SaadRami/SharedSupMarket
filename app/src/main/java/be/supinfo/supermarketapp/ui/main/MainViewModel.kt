@@ -6,23 +6,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import be.supinfo.supermarketapp.App
 import be.supinfo.supermarketapp.data.Repository
+import be.supinfo.supermarketapp.data.remote.Product
 import be.supinfo.supermarketapp.util.TAG_VIEWMODEL
 import javax.inject.Inject
 
-class ProductsViewModel(private val repository: Repository) :
+class MainViewModel(private val repository: Repository) :
     ViewModel() {
 
-    // private val dataRepo: Repository = Repository()
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
     private val prenom = MutableLiveData<String>()
-    val products = repository.productsLiveData
-    //val selectedProduct = MutableLiveData<Product>()
+    val rayons = repository.rayonsLiveData
 
-    //private val context = app
+    //    val selectedRayon = MutableLiveData<Rayon>()
+    val selectedProduct = MutableLiveData<Product>()
+    val recommendedProducts = repository.recommendedLiveData
     val appTitle = MutableLiveData<String>()
-
 
     init {
         App.component.inject(this)
@@ -42,6 +42,10 @@ class ProductsViewModel(private val repository: Repository) :
 
     fun refreshProducts() {
         repository.refreshData()
+    }
+
+    fun selectProduct(product: Product) {
+        selectedProduct.value = product
     }
 
 }

@@ -4,9 +4,14 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface SupMarketApi {
-    @GET("/")
-    suspend fun getProductsData(): Response<List<Product>>
+    @GET("/products")
+    suspend fun getAllProductsData(): Response<List<Product>>
 
-    @GET("/recommendations")
+    @GET("/rayons")
+    suspend fun getAllRayonsData(): Response<List<Rayon>>
+
+
+    @GET("/recommended_products")
     suspend fun getRecommendedProducts(): Response<List<Product>>
+
 }

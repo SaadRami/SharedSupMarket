@@ -2,15 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/about"
-        android:title="@string/about"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/settings"
-        android:icon="@drawable/ic_settings"
-        android:menuCategory="container"
-        android:title="Item"
-        android:visible="true"
-        app:showAsAction="always" />
+    <group android:id="@+id/about_settings">
+        <!--        <item-->
+        <!--            android:id="@+id/about"-->
+        <!--            android:title="@string/about"-->
+        <!--            app:showAsAction="never" />-->
+
+
+        <item
+            android:id="@+id/menu_settings"
+            android:icon="@drawable/ic_settings"
+            android:menuCategory="container"
+            android:title="Item"
+            android:visible="true"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/menu_check"
+            android:icon="@drawable/ic_check"
+            android:menuCategory="container"
+            android:title="Item"
+            android:visible="false"
+            app:showAsAction="always" />
+    </group>
 </menu>

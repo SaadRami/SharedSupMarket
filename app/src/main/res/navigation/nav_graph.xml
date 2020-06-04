@@ -3,38 +3,102 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/productsFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/productsFragment"
-        android:name="be.supinfo.supermarketapp.ui.main.ProductsFragment"
+        android:id="@+id/mainFragment"
+        android:name="be.supinfo.supermarketapp.ui.main.MainFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/products_fragment">
+        tools:layout="@layout/main_fragment">
         <action
-            android:id="@+id/action_go_to_details"
-            app:destination="@id/detailsFragment" />
+            android:id="@+id/action_main_to_settings"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_main_to_about"
+            app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_main_to_userprofile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_main_to_transactions"
+            app:destination="@id/transactionsFragment" />
+        <action
+            android:id="@+id/action_main_to_cart"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_main_to_products"
+            app:destination="@id/productsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="be.supinfo.supermarketapp.ui.details.DetailsFragment"
         android:label="@string/products_details_fragment"
-        tools:layout="@layout/products_details_fragment">
+        tools:layout="@layout/products_details_fragment"/>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="be.supinfo.supermarketapp.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_go_back_to_products"
-            app:destination="@id/productsFragment" />
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/loginFragment" />
     </fragment>
-    <activity
-        android:id="@+id/aboutActivity"
-        android:name="be.supinfo.supermarketapp.AboutActivity"
-        android:label="activity_about"
-        tools:layout="@layout/activity_about" />
-    <activity
-        android:id="@+id/splashActivity"
-        android:name="be.supinfo.supermarketapp.ui.splash.SplashActivity"
-        android:label="activity_splash"
-        tools:layout="@layout/activity_splash" />
-    <activity
-        android:id="@+id/settingsActivity"
-        android:name="be.supinfo.supermarketapp.SettingsActivity"
-        android:label="SettingsActivity" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="be.supinfo.supermarketapp.ui.main.SettingsFragment"
+        android:label="SettingsFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="be.supinfo.supermarketapp.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="be.supinfo.supermarketapp.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_main"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="be.supinfo.supermarketapp.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_register_back_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="be.supinfo.supermarketapp.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/transactionsFragment"
+        android:name="be.supinfo.supermarketapp.TransactionsFragment"
+        android:label="fragment_transactions"
+        tools:layout="@layout/fragment_transactions" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="be.supinfo.supermarketapp.ui.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_cart_back_to_main"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="be.supinfo.supermarketapp.ui.products.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_products_to_cart"
+            app:destination="@id/cartFragment" />
+    </fragment>
 </navigation>

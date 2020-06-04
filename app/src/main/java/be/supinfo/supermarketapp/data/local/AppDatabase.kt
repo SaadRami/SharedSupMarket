@@ -5,16 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import be.supinfo.supermarketapp.data.remote.Product
+import be.supinfo.supermarketapp.data.remote.Rayon
 
 // Add an anotation
 // entities list of classes (entities)
 // version of the database, upgrade the version when restructuring the databse
 // exportSchema = false -> don't generate files to document the database
-@Database(entities = [Product::class], version = 1, exportSchema = false)
+@Database(entities = [Product::class, Rayon::class], version = 5, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     // for each data access object add an abstract function
     abstract fun productDao(): ProductDao
+
+    abstract fun rayonDao(): RayonDao
 
     // we need a function to get an instance of this class
     companion object {

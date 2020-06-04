@@ -2,6 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_parent_view_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -22,6 +23,7 @@
 
     <include layout="@layout/content_main" />
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -29,6 +31,22 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
-        app:srcCompat="@android:drawable/btn_plus" />
+        android:src="@drawable/ic_cart"
+        app:backgroundTint="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/fabCount"
+        android:layout_width="18sp"
+        android:layout_height="18sp"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/circle_layout"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="#fff"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        app:layout_anchor="@+id/fab" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

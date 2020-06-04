@@ -12,6 +12,9 @@ interface ProductDao {
     @Query("SELECT * FROM products")
     suspend fun getAll(): List<Product>
 
+    @Query("SELECT * FROM Products WHERE rayonId = :rayonId")
+    suspend fun getProductsByRayonId(rayonId: Int): List<Product>
+
     @Insert
     suspend fun insertProduct(product: Product)
 

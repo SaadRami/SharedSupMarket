@@ -4,6 +4,7 @@ import android.app.Application
 import be.supinfo.supermarketapp.data.Repository
 import be.supinfo.supermarketapp.data.local.AppDatabase
 import be.supinfo.supermarketapp.data.local.ProductDao
+import be.supinfo.supermarketapp.data.local.RayonDao
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -28,6 +29,10 @@ class RepositoryModule(private val baseUrl: String) {
     @Singleton
     @Provides
     fun providesProductDao(database: AppDatabase): ProductDao = database.productDao()
+
+    @Singleton
+    @Provides
+    fun providesRayonDao(database: AppDatabase): RayonDao = database.rayonDao()
 
     @Singleton
     @Provides
