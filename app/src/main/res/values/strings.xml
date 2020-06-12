@@ -7,7 +7,9 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="price_format">%1$s€</string>
+    <string name="price_format">%.2f€</string>
+
+
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
@@ -16,7 +18,7 @@
     <string name="edit_text2_hint">Prénom</string>
     <string name="share">Share</string>
     <string name="about">A Propos</string>
-    <string name="settings">Settings</string>
+    <string name="settings">Paramètres</string>
     <string name="open_nav_drawer">Open nav drawer</string>
     <string name="close_nav_drawer">Close nav drawer</string>
     <string name="title_activity_main3">MainActivity</string>
@@ -76,5 +78,6 @@
     <string name="add">Ajouter</string>
     <string name="item_removed_from_cart">Article supprimé avec succès</string>
     <string name="confirm_buy">Confirmer l\'achat</string>
+    <string name="transactions">Transactions</string>
 
 </resources>

@@ -16,10 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".AboutActivity"
-            android:label="@string/about"
-            android:parentActivityName=".AboutActivity" />
-        <activity
             android:name=".AnotherActvity"
             android:parentActivityName=".MainActivity" />
         <activity
@@ -31,5 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- ca va être violent de vu le nombre de classe , on pourrait faire un screen de l'arborescence
+         ha oui ok
+         jme rappel plus de la branche
+         merci
+         -->
     </application>
 </manifest>

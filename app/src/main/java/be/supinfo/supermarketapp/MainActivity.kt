@@ -9,9 +9,11 @@ import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import androidx.navigation.Navigation
+import be.supinfo.supermarketapp.ui.transactions.TransactionsViewModel
 import be.supinfo.supermarketapp.util.MyHelper
 import be.supinfo.supermarketapp.util.TAG_MAIN_ACTIVITY
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -28,6 +30,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private lateinit var navController: NavController
     private lateinit var fab: FloatingActionButton
     private lateinit var navGraph: NavGraph
+    private lateinit var transactionsViewModel: TransactionsViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +51,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 //        toggle.syncState()
 //        NavigationUI.setupWithNavController(toolbar, navController, drawerLayout)
 
+        transactionsViewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        ).get(TransactionsViewModel::class.java)
+
 
         fab = findViewById(R.id.fab)
         sharedViewModel.countML.observe(this, Observer {
@@ -65,7 +73,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 navController.navigate(R.id.action_main_to_about)
             }
             R.id.nav_settings -> {
-                navController.navigate(R.id.settingsFragment)
+                navController.navigate(R.id.action_main_to_settings)
+            }
+            R.id.nav_transactions -> {
+                transactionsViewModel.getTransactionsWithProductsAndProductsInCart()
+                navController.navigate(R.id.action_main_to_transactions)
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)

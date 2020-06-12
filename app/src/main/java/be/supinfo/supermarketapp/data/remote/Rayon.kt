@@ -8,10 +8,6 @@ import com.squareup.moshi.Json
 @Entity(tableName = "Rayons")
 data class Rayon(
     @PrimaryKey
-    @ColumnInfo(name = "id") val id: Int,
+    @ColumnInfo(name = "id") val id: Long,
     @Json(name = "title") val title: String
-) {
-    val imageUrl: String
-        //        get() = "$BASE_URL/$filename"
-        get() = "https://logodix.com/logo/1038765.png"
-}
+)

@@ -14,8 +14,10 @@ class CartViewModel(private val repository: Repository) :
     @Inject
     lateinit var sharedPreferences: SharedPreferences
 
-    val productsInCartMLD = MutableLiveData<List<Product>>()
+    val totalPrice = MutableLiveData<Double>()
+    val productsInCartMLD = MutableLiveData<ArrayList<Product>>()
     private var productsInCart = ArrayList<Product>()
+    private var ttl: Double = 0.0
 
 
     init {
@@ -46,12 +48,13 @@ class CartViewModel(private val repository: Repository) :
         val productIndex: Int = findContactIndex(product.title)
         if (productIndex != -1) {
             productsInCart[productIndex].quantityInCart++
-            Log.i("9lawi", "${productsInCart[productIndex].hashCode()}")
         } else {
             product.quantityInCart = 1
             productsInCart.add(product)
         }
+        //  productsInCart.add(product)
         productsInCartMLD.value = productsInCart
+        incrementTotal(product.price)
     }
 
     fun removeProductInCart(product: Product) {
@@ -61,5 +64,21 @@ class CartViewModel(private val repository: Repository) :
             productsInCart.remove(productFound)
         }
         productsInCartMLD.value = productsInCart
+        decrementTotal(product.price * product.quantityInCart)
+        Log.i("ezr", totalPrice.value.toString())
+    }
+
+    fun incrementTotal(price: Double) {
+        ttl += price
+        totalPrice.value = ttl
+    }
+
+    fun decrementTotal(price: Double) {
+        ttl -= price
+        totalPrice.value = ttl
+    }
+
+    fun performTransaction() {
+        repository.addTransaction(totalPrice.value, productsInCartMLD.value)
     }
 }

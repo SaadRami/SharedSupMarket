@@ -1,5 +1,8 @@
 package be.supinfo.supermarketapp.util
 
+///////////////// BASE URL ////////////////////////
+const val BASE_URL = "https://demo8934521.mockable.io"
+//////////////////////////////////////////////////
 const val LOG_CARTFRAGMENT = "CartFragment"
 const val TAG_MAIN_FRAGMENT = "MainFragment"
 const val TAG_PRODUCTS_FRAGMENT = "ProductsFragment"
@@ -12,7 +15,6 @@ const val ET_PRENOM = "et_prenom"
 const val TAG_VIEWMODEL = "viewModel"
 const val TAG_REPOSITORY = "RepositoryTag"
 const val CACHE_DIR = "productscache.json"
-const val BASE_URL = "https://demo8934521.mockable.io"
 const val TAG_FRAGMENT = "recyclerViewfrag"
 const val TAG_DETAIL_FRAGMENT = "DetailFragment"
 const val JD_IMAGE =

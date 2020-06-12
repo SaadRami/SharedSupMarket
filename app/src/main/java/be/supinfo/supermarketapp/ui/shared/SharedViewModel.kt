@@ -14,7 +14,7 @@ class SharedViewModel(private val repository: Repository) :
 
     val appTitle = MutableLiveData<String>()
     val countML = MutableLiveData<Int>()
-    var count: Int = 0
+    private var count: Int = 0
 
     init {
         App.component.inject(this)

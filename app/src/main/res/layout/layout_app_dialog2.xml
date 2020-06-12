@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@drawable/dialog_background"
+    android:background="@drawable/transaction_item_background"
     android:orientation="vertical">
 
     <ImageButton

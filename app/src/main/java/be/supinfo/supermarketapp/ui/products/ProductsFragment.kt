@@ -44,7 +44,6 @@ class ProductsFragment : BaseFragment(), ProductsRecyclerViewAdapter.ProductList
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         App.component.inject(this)
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
@@ -111,7 +110,7 @@ class ProductsFragment : BaseFragment(), ProductsRecyclerViewAdapter.ProductList
         if (idDialog == 1 || idDialog == 2) {
             var product: Product = mainViewModel.selectedProduct.value!!
             cartViewModel.addProductInCart(product)
-            sharedViewModel.incrementFabCount(product.quantityInCart)
+            sharedViewModel.incrementFabCount(1)
             Snackbar.make(
                 requireView(),
                 getString(R.string.item_added_to_cart),
@@ -141,7 +140,7 @@ class ProductsFragment : BaseFragment(), ProductsRecyclerViewAdapter.ProductList
     override fun onRemoveProductInCart(product: Product) {
     }
 
-    override fun onUpdateFabCounter(quantity: Int, updateFlag: String) {
+    override fun onUpdateFabAndTotal(quantity: Int, updateFlag: String, price: Double) {
         TODO("Not yet implemented")
     }
 }

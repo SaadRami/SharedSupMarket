@@ -20,14 +20,14 @@
             android:id="@+id/action_main_to_userprofile"
             app:destination="@id/profileFragment" />
         <action
-            android:id="@+id/action_main_to_transactions"
-            app:destination="@id/transactionsFragment" />
-        <action
             android:id="@+id/action_main_to_cart"
             app:destination="@id/cartFragment" />
         <action
             android:id="@+id/action_main_to_products"
             app:destination="@id/productsFragment" />
+        <action
+            android:id="@+id/action_main_to_transactions"
+            app:destination="@id/transactionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
@@ -80,7 +80,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/transactionsFragment"
-        android:name="be.supinfo.supermarketapp.TransactionsFragment"
+        android:name="be.supinfo.supermarketapp.ui.transactions.TransactionsFragment"
         android:label="fragment_transactions"
         tools:layout="@layout/fragment_transactions" />
     <fragment

@@ -9,6 +9,7 @@ import be.supinfo.supermarketapp.ui.details.ProductsDetailsViewModel
 import be.supinfo.supermarketapp.ui.main.MainViewModel
 import be.supinfo.supermarketapp.ui.products.ProductsViewModel
 import be.supinfo.supermarketapp.ui.shared.SharedViewModel
+import be.supinfo.supermarketapp.ui.transactions.TransactionsViewModel
 import javax.inject.Inject
 
 class ViewModelFactory : ViewModelProvider.Factory {
@@ -36,6 +37,9 @@ class ViewModelFactory : ViewModelProvider.Factory {
                 CartViewModel(repository) as T
             }
 
+            modelClass.isAssignableFrom(TransactionsViewModel::class.java) -> {
+                TransactionsViewModel(repository) as T
+            }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }

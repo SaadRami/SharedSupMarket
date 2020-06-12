@@ -4,20 +4,35 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import be.supinfo.supermarketapp.data.local.dao.CartProductDao
+import be.supinfo.supermarketapp.data.local.dao.ProductDao
+import be.supinfo.supermarketapp.data.local.dao.RayonDao
+import be.supinfo.supermarketapp.data.local.dao.TransactionDao
 import be.supinfo.supermarketapp.data.remote.Product
 import be.supinfo.supermarketapp.data.remote.Rayon
+import be.supinfo.supermarketapp.util.Converters
 
 // Add an anotation
 // entities list of classes (entities)
 // version of the database, upgrade the version when restructuring the databse
 // exportSchema = false -> don't generate files to document the database
-@Database(entities = [Product::class, Rayon::class], version = 5, exportSchema = false)
+@Database(
+    entities = [Product::class, Rayon::class, CartProduct::class, TransactionStore::class],
+    version = 26,
+    exportSchema = false
+)
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     // for each data access object add an abstract function
     abstract fun productDao(): ProductDao
 
     abstract fun rayonDao(): RayonDao
+
+    abstract fun transactionDao(): TransactionDao
+
+    abstract fun productInCartDao(): CartProductDao
 
     // we need a function to get an instance of this class
     companion object {

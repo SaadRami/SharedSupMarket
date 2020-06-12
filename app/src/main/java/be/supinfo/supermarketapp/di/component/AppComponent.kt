@@ -14,6 +14,8 @@ import be.supinfo.supermarketapp.ui.main.MainViewModel
 import be.supinfo.supermarketapp.ui.products.ProductsFragment
 import be.supinfo.supermarketapp.ui.products.ProductsViewModel
 import be.supinfo.supermarketapp.ui.shared.SharedViewModel
+import be.supinfo.supermarketapp.ui.transactions.TransactionsFragment
+import be.supinfo.supermarketapp.ui.transactions.TransactionsViewModel
 import be.supinfo.supermarketapp.util.AppDialog
 import be.supinfo.supermarketapp.util.ViewModelFactory
 import dagger.Component
@@ -35,4 +37,6 @@ interface AppComponent {
     fun inject(cartViewModel: CartViewModel)
     fun inject(cartFragment: CartFragment)
     fun inject(mainActivity: MainActivity)
+    fun inject(transactionsFragment: TransactionsFragment)
+    fun inject(transactionsViewModel: TransactionsViewModel)
 }

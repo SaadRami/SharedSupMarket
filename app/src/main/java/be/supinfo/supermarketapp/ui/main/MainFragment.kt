@@ -255,7 +255,7 @@ class MainFragment : BaseFragment(), RayonsRecyclerViewAdapter.RayonListener,
             var product: Product = mainViewModel.selectedProduct.value!!
             cartViewModel.addProductInCart(product)
             Log.i(TAG_MAIN_FRAGMENT, "${cartViewModel.productsInCartMLD.value?.size}")
-            sharedViewModel.incrementFabCount(product.quantityInCart)
+            sharedViewModel.incrementFabCount(1)
             Snackbar.make(
                 clparent,
                 getString(R.string.item_added_to_cart),
@@ -274,7 +274,7 @@ class MainFragment : BaseFragment(), RayonsRecyclerViewAdapter.RayonListener,
     override fun onRemoveProductInCart(product: Product) {
     }
 
-    override fun onUpdateFabCounter(quantity: Int, updateFlag: String) {
+    override fun onUpdateFabAndTotal(quantity: Int, updateFlag: String, price: Double) {
         TODO("Not yet implemented")
     }
 }

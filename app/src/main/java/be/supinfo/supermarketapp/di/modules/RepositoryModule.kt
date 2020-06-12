@@ -3,8 +3,10 @@ package be.supinfo.supermarketapp.di.modules
 import android.app.Application
 import be.supinfo.supermarketapp.data.Repository
 import be.supinfo.supermarketapp.data.local.AppDatabase
-import be.supinfo.supermarketapp.data.local.ProductDao
-import be.supinfo.supermarketapp.data.local.RayonDao
+import be.supinfo.supermarketapp.data.local.dao.CartProductDao
+import be.supinfo.supermarketapp.data.local.dao.ProductDao
+import be.supinfo.supermarketapp.data.local.dao.RayonDao
+import be.supinfo.supermarketapp.data.local.dao.TransactionDao
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -29,6 +31,14 @@ class RepositoryModule(private val baseUrl: String) {
     @Singleton
     @Provides
     fun providesProductDao(database: AppDatabase): ProductDao = database.productDao()
+
+    @Singleton
+    @Provides
+    fun providesTransactionDao(database: AppDatabase): TransactionDao = database.transactionDao()
+
+    @Singleton
+    @Provides
+    fun providesProductInCartDao(database: AppDatabase): CartProductDao = database.productInCartDao()
 
     @Singleton
     @Provides

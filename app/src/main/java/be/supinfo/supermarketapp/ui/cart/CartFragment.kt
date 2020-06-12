@@ -3,12 +3,10 @@ package be.supinfo.supermarketapp.ui.cart
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import be.supinfo.supermarketapp.App
 import be.supinfo.supermarketapp.BaseFragment
@@ -21,17 +19,16 @@ import be.supinfo.supermarketapp.ui.main.REMOVE
 import be.supinfo.supermarketapp.ui.shared.SharedViewModel
 import be.supinfo.supermarketapp.util.*
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_cart.*
 import javax.inject.Inject
 
 class CartFragment : BaseFragment(), AppDialog.DialogEvents,
     ProductsRecyclerViewAdapter.ProductListener {
-
     private lateinit var navController: NavController
     private lateinit var cartViewModel: CartViewModel
     private lateinit var sharedViewModel: SharedViewModel
     private lateinit var recyclerViewProductsInCart: RecyclerView
     private lateinit var cart_parent_view: ConstraintLayout
-
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -57,10 +54,15 @@ class CartFragment : BaseFragment(), AppDialog.DialogEvents,
             viewModelFactory
         ).get(CartViewModel::class.java)
 
-        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
-        view.findViewById<Button>(R.id.buyNo).setOnClickListener {
-            navController.navigateUp()
-        }
+//        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+//        view.findViewById<Button>(R.id.buyNo).setOnClickListener {
+//            navController.navigateUp()
+//        }
+
+        cartViewModel.totalPrice.observe(viewLifecycleOwner, Observer {
+//            tvTotal_cart_value.text = String.format("%.2f€", it)
+            tvTotal_cart_value.text = getString(R.string.price_format, it)
+        })
 
         cartViewModel.productsInCartMLD.observe(viewLifecycleOwner, Observer {
             Log.i(LOG_CARTFRAGMENT, "${it.size}")
@@ -94,8 +96,9 @@ class CartFragment : BaseFragment(), AppDialog.DialogEvents,
     }
 
     override fun onPositiveResult(idDialog: Int, args: Bundle) {
-
-
+        if (idDialog == 2) {
+            cartViewModel.performTransaction()
+        }
     }
 
     override fun onNegativeResult(idDialog: Int, args: Bundle) {
@@ -114,14 +117,21 @@ class CartFragment : BaseFragment(), AppDialog.DialogEvents,
             getString(R.string.item_removed_from_cart),
             Snackbar.LENGTH_SHORT
         ).show()
+        Log.i("test", "${sharedViewModel.countML.value}")
 
 //        Snackbar.make(cart_parent_view, "Your message", Snackbar.LENGTH_LONG).apply {view.layoutParams = (view.layoutParams as CoordinatorLayout.LayoutParams).apply {setMargins(leftMargin, topMargin, rightMargin, 200)}}.show()
     }
 
-    override fun onUpdateFabCounter(quantity: Int, updateFlag: String) {
+    override fun onUpdateFabAndTotal(quantity: Int, updateFlag: String, price: Double) {
         when (updateFlag) {
-            ADD -> sharedViewModel.incrementFabCount(quantity)
-            REMOVE -> sharedViewModel.decrementFabCount(quantity)
+            ADD -> {
+                sharedViewModel.incrementFabCount(quantity)
+                cartViewModel.incrementTotal(price)
+            }
+            REMOVE -> {
+                sharedViewModel.decrementFabCount(quantity)
+                cartViewModel.decrementTotal(price)
+            }
         }
     }
 

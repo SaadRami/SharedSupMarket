@@ -15,7 +15,7 @@ class ProductsViewModel(private val repository: Repository) :
     lateinit var sharedPreferences: SharedPreferences
 
     val selectedRayon = MutableLiveData<Rayon>()
-    val productsByRayon = repository.productsByRayon
+    val productsByRayon = repository.productsByRayonLiveData
 
     init {
         App.component.inject(this)

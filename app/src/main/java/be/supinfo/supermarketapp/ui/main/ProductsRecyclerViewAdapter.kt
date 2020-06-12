@@ -19,7 +19,7 @@ const val REMOVE = "remove"
 
 class ProductsRecyclerViewAdapter(
     val context: Context, private val products: List<Product>,
-    private val itemListener: ProductListener?, val isCart: Boolean
+    private val itemListener: ProductListener?, private val isCart: Boolean
 ) :
     RecyclerView.Adapter<ProductsRecyclerViewAdapter.ViewHolder>() {
 
@@ -47,6 +47,7 @@ class ProductsRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = products[position]
+
         with(holder) {
             title.text = product.title
 //            description.text = product.description
@@ -75,7 +76,7 @@ class ProductsRecyclerViewAdapter(
                     qt++
                     quantityValue.text = "${qt}"
                     product.quantityInCart = qt
-                    itemListener?.onUpdateFabCounter(1, ADD)
+                    itemListener?.onUpdateFabAndTotal(1, ADD, product.price)
                 }
 
                 reduceQuantity.setOnClickListener {
@@ -84,7 +85,7 @@ class ProductsRecyclerViewAdapter(
                         qt--
                         quantityValue.text = "${qt}"
                         product.quantityInCart = qt
-                        itemListener?.onUpdateFabCounter(1, REMOVE)
+                        itemListener?.onUpdateFabAndTotal(1, REMOVE, product.price)
                     }
                 }
 
@@ -115,7 +116,7 @@ class ProductsRecyclerViewAdapter(
         fun onProductItemClick(product: Product)
         fun onAddToCartClick(product: Product)
         fun onRemoveProductInCart(product: Product)
-        fun onUpdateFabCounter(quantity: Int, updateFlag: String)
+        fun onUpdateFabAndTotal(quantity: Int, updateFlag: String, price: Double)
     }
 
 }
