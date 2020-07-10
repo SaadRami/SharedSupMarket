@@ -79,5 +79,6 @@
     <string name="item_removed_from_cart">Article supprimé avec succès</string>
     <string name="confirm_buy">Confirmer l\'achat</string>
     <string name="transactions">Transactions</string>
+    <string name="transaction_performed">L\'achat a été effectué avec succes</string>
 
 </resources>

@@ -33,4 +33,11 @@ class SharedViewModel(private val repository: Repository) :
         count -= qtRemoved
         countML.value = count
     }
+
+    fun clearFabCount() {
+        count = 0
+        countML.value = count
+    }
+
+
 }

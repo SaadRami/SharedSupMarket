@@ -16,6 +16,7 @@ import java.text.NumberFormat
 
 const val ADD = "add"
 const val REMOVE = "remove"
+const val CLEAR = "clear"
 
 class ProductsRecyclerViewAdapter(
     val context: Context, private val products: List<Product>,

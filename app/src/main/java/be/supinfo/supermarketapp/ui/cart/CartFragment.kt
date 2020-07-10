@@ -1,12 +1,15 @@
 package be.supinfo.supermarketapp.ui.cart
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import be.supinfo.supermarketapp.App
 import be.supinfo.supermarketapp.BaseFragment
@@ -17,7 +20,10 @@ import be.supinfo.supermarketapp.ui.main.DIALOG_ID_CONFIRMATION
 import be.supinfo.supermarketapp.ui.main.ProductsRecyclerViewAdapter
 import be.supinfo.supermarketapp.ui.main.REMOVE
 import be.supinfo.supermarketapp.ui.shared.SharedViewModel
-import be.supinfo.supermarketapp.util.*
+import be.supinfo.supermarketapp.util.AppDialog
+import be.supinfo.supermarketapp.util.DIALOG_ID
+import be.supinfo.supermarketapp.util.DIALOG_MESSAGE
+import be.supinfo.supermarketapp.util.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_cart.*
 import javax.inject.Inject
@@ -45,7 +51,6 @@ class CartFragment : BaseFragment(), AppDialog.DialogEvents,
         recyclerViewProductsInCart = view.findViewById(R.id.rvProductsInCart)
         cart_parent_view = view.findViewById(R.id.cart_parent_view)
 
-
         sharedViewModel =
             ViewModelProvider(requireActivity(), viewModelFactory).get(SharedViewModel::class.java)
 
@@ -54,7 +59,7 @@ class CartFragment : BaseFragment(), AppDialog.DialogEvents,
             viewModelFactory
         ).get(CartViewModel::class.java)
 
-//        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 //        view.findViewById<Button>(R.id.buyNo).setOnClickListener {
 //            navController.navigateUp()
 //        }
@@ -64,11 +69,7 @@ class CartFragment : BaseFragment(), AppDialog.DialogEvents,
             tvTotal_cart_value.text = getString(R.string.price_format, it)
         })
 
-        cartViewModel.productsInCartMLD.observe(viewLifecycleOwner, Observer {
-            Log.i(LOG_CARTFRAGMENT, "${it.size}")
-            recyclerViewProductsInCart.adapter =
-                ProductsRecyclerViewAdapter(requireContext(), it, this, true)
-        })
+
 
         return view
     }
@@ -90,16 +91,30 @@ class CartFragment : BaseFragment(), AppDialog.DialogEvents,
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
+        cartViewModel.productsInCartMLD.observe(viewLifecycleOwner, Observer {
+            //Log.i(LOG_CARTFRAGMENT, "${it.size}")
+            menu.findItem(R.id.menu_check).isVisible = it.isNotEmpty()
+            recyclerViewProductsInCart.adapter =
+                ProductsRecyclerViewAdapter(requireContext(), it, this, true)
+        })
         menu.findItem(R.id.menu_settings).isVisible = false
-        menu.findItem(R.id.menu_check).isVisible = true
         super.onPrepareOptionsMenu(menu)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onPositiveResult(idDialog: Int, args: Bundle) {
         if (idDialog == 2) {
             cartViewModel.performTransaction()
+            sharedViewModel.clearFabCount()
+            Snackbar.make(
+                requireActivity().findViewById(R.id.cl_parent_view_main),
+                getString(R.string.transaction_performed),
+                Snackbar.LENGTH_SHORT
+            ).show()
+            navController.navigateUp()
         }
     }
+
 
     override fun onNegativeResult(idDialog: Int, args: Bundle) {
 

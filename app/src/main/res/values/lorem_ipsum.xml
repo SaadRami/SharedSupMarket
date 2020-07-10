@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="about_string"> Vue d\'ensemble du projet !
+Ce projet consiste à mettre une place une refonte intégrale du processus d\'acquisition d\'articles au sein
+d\'un commerce, et ce par l\'intérmediaire de certains dispositifs capables entre autres d\'identifier
+en temps réel la nature des produits selectionné par les clients ainsi que les mouvememnts de ces derniers.
+Ce projet a pour objectif d\'optimiser le temps aux client lors de leurs sessions d\'achat grâce à son aspect
+commode qui permet aux acheteurs de faire leurs courses sans pour autant passer par la caisse pour effectuer
+le paiement, en effet, celui ci est réalisé systématiquement aussitôt que le client quitte le commerce.
+L\'application Mobile associé à ce service permet de donner accès à l\'utilisateur à toutes les transactions qu\'il
+a préalablement effectué, elle permet également de les tenir informés des nouvelles promotions appliqués sur
+certains articles susceptibles de les intéresser.</string>
     <string name="lorem_ipsum2">Lorem iLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametpsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit ametLorem ipsum dolor sit amet</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet est.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet est.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet est.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet est.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet est.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet est.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet est.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet est.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus at laoreet est. Morbi nec eros ac dui viverra auctor quis et massa. Suspendisse egestas suscipit dolor vel auctor. Phasellus feugiat quam ut mi ullamcorper, a egestas lorem dictum. Nullam fringilla congue tincidunt. Ut ac velit quis metus aliquet eleifend. Proin ex dui, fringilla eu sollicitudin et, mattis eu libero. Maecenas et accumsan purus. Pellentesque vitae auctor ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque lacus ligula, eget interdum eros feugiat ac. Sed convallis eros nec metus venenatis, eu fringilla nisl pellentesque.</string>
 </resources>

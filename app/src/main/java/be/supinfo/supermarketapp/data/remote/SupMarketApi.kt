@@ -13,5 +13,4 @@ interface SupMarketApi {
 
     @GET("/recommended_products")
     suspend fun getRecommendedProducts(): Response<List<Product>>
-
 }

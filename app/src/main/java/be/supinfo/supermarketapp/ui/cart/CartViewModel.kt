@@ -1,7 +1,9 @@
 package be.supinfo.supermarketapp.ui.cart
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import be.supinfo.supermarketapp.App
@@ -16,7 +18,7 @@ class CartViewModel(private val repository: Repository) :
 
     val totalPrice = MutableLiveData<Double>()
     val productsInCartMLD = MutableLiveData<ArrayList<Product>>()
-    private var productsInCart = ArrayList<Product>()
+    var productsInCart = ArrayList<Product>()
     private var ttl: Double = 0.0
 
 
@@ -78,7 +80,20 @@ class CartViewModel(private val repository: Repository) :
         totalPrice.value = ttl
     }
 
+    fun clearTotal() {
+        ttl = 0.0
+        totalPrice.value = ttl
+    }
+
+    fun clearCart() {
+        productsInCart = ArrayList<Product>()
+        productsInCartMLD.value = productsInCart
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun performTransaction() {
         repository.addTransaction(totalPrice.value, productsInCartMLD.value)
+        clearCart()
+        clearTotal()
     }
 }
